@@ -38,9 +38,8 @@ public class TextFromArticleCreator
         String fileName = date + "-" + title + ".txt";
 
         //Write to file
-        try
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8"))
         {
-            PrintWriter writer = new PrintWriter(fileName, "UTF-8");
             writer.println(articleURL);
             writer.println(body + "\n");
             for(String link: links)
