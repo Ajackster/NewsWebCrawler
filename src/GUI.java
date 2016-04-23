@@ -17,6 +17,11 @@ import javafx.stage.Stage;
  */
 public class GUI extends Application
 {
+    NewsCrawler newsCrawler = new NewsCrawler();
+    public GUI(NewsCrawler newsCrawler) {
+        this.newsCrawler = newsCrawler;
+    }
+
     public void start(Stage primaryStage)
     {
         //Declaring label, textfield, and button for GUI
@@ -27,11 +32,8 @@ public class GUI extends Application
         //Creating the GridView
         makeGrid(inputURLLabel, inputURLTextField, searchButton, primaryStage);
 
-        //Declaring an instance of Main in order to grab allActions() for the Button
-        Main main = new Main();
-
         //On searchButton Click
-        searchButton.setOnAction(e -> main.allActions(inputURLTextField));
+        searchButton.setOnAction(e -> newsCrawler.Scrape(inputURLTextField));
     }
 
     //This method makes the GridView
