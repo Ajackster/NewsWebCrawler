@@ -22,7 +22,9 @@ public class NewsCrawler
         javafx.application.Application.launch(GUI.class);
     }
 
-    public void Scrape(TextField inputURLTextField) {
+    //This method is called in the GUI class on searchButton click
+    public void Scrape(TextField inputURLTextField)
+    {
 
         //Getting the input URL from the user
         String inputURL = inputURLTextField.getText();
@@ -80,8 +82,9 @@ public class NewsCrawler
         return null;
     }
 
-    //This method utiliszes the TextFromArticleCreator to write to the file
-    private static void write(String newLink, Document newDocument) {
+    //This method utilizes the TextFromArticleCreator to write to the file
+    private static void write(String newLink, Document newDocument)
+    {
         TextFromArticleCreator otherTextFromArticleCreator = new TextFromArticleCreator();
         otherTextFromArticleCreator.writeToFile(newDocument, newLink);
     }

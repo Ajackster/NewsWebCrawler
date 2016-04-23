@@ -2,6 +2,7 @@
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -34,8 +35,10 @@ public class TextFromArticleCreator
         ArticleLinks articleLinks= new ArticleLinks(articleDocument);
         ArrayList<String> links = articleLinks.getLinksList();
 
-        //Stating filename in proper format
+        //Stating filename in proper format and making sure it has proper syntax
         String fileName = date + "-" + title + ".txt";
+        fileName = fileName.replace("'", "");
+        fileName = fileName.replace("?", "");
 
         //Write to file
         try(PrintWriter writer = new PrintWriter(fileName, "UTF-8"))

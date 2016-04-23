@@ -17,10 +17,8 @@ import javafx.stage.Stage;
  */
 public class GUI extends Application
 {
+    //Creating instance of NewsCrawler
     NewsCrawler newsCrawler = new NewsCrawler();
-    public GUI(NewsCrawler newsCrawler) {
-        this.newsCrawler = newsCrawler;
-    }
 
     public void start(Stage primaryStage)
     {
