@@ -82,10 +82,10 @@ public class NewsCrawler
         return null;
     }
 
-    //This method utilizes the TextFromArticleCreator to write to the file
+    //This method utilizes the ArticleTextOutput to write to the file
     private static void write(String newLink, Document newDocument)
     {
-        TextFromArticleCreator otherTextFromArticleCreator = new TextFromArticleCreator();
+        ArticleTextOutput otherTextFromArticleCreator = new ArticleTextOutput();
         otherTextFromArticleCreator.writeToFile(newDocument, newLink);
     }
 
