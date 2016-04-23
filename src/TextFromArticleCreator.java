@@ -18,7 +18,7 @@ public class TextFromArticleCreator
 
     public void writeToFile(Document articleDocument, String articleURL)
     {
-        //Getting the date article is accessed
+        //Getting the date article is downloaded
         DateFinder dateArticleAccessed = new DateFinder();
         String date = dateArticleAccessed.getFileDate();
 

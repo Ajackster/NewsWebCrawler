@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,11 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 
 /**
  * The NewsWebCrawler traverses major news websites and scrapes it for articles.
@@ -33,55 +27,17 @@ public class GUI extends Application
         //Creating the GridView
         makeGrid(inputURLLabel, inputURLTextField, searchButton, primaryStage);
 
+        //Declaring an instance of Main in order to grab allActions() for the Button
+        Main main = new Main();
+
         //On searchButton Click
-        searchButton.setOnAction((ActionEvent event) -> {
-
-            //Getting the input URL from the user
-            String inputURL = inputURLTextField.getText();
-
-            //Creating document from the input URL
-            Document document = getDocumentFromURL(inputURL);
-
-            //This object is used to find the headline article from the given URL
-            ArticleFinder articleFinder = new ArticleFinder();
-
-            if(inputURL.contains("washingtonpost"))
-            {
-                //Find Washington Post headline article
-                String washingtonPostLink = articleFinder.findWashingtonPostArticle(document);
-                Document washingtonPostDocument = getDocumentFromURL(washingtonPostLink);
-
-                write(washingtonPostLink, washingtonPostDocument);
-            }
-            else
-            {
-                //Finding headline articles from News Websites other than Washington Post
-                String otherNewsLink = articleFinder.findOtherArticles(document);
-                Document otherNewsDocument = getDocumentFromURL(otherNewsLink);
-
-                write(otherNewsLink, otherNewsDocument);
-            }
-        });
-    }
-
-    //This method creates the document from the input URL
-    private static Document getDocumentFromURL(String URL)
-    {
-        try
-        {
-            return Jsoup.connect(URL).get();
-        }
-        catch(IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+        searchButton.setOnAction(e -> main.allActions(inputURLTextField));
     }
 
     //This method makes the GridView
     private static void makeGrid(Label inputURLLabel, TextField inputURLTextField,
                                 Button searchButton, Stage primaryStage)
     {
-
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.add(inputURLLabel, 0, 0);
@@ -91,12 +47,5 @@ public class GUI extends Application
         Scene scene = new Scene(grid, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-    }
-
-    //This method officially writes to the file
-    public static void write(String newLink, Document newDocument) {
-        TextFromArticleCreator otherTextFromArticleCreator = new TextFromArticleCreator();
-        otherTextFromArticleCreator.writeToFile(newDocument, newLink);
     }
 }
