@@ -99,9 +99,6 @@ public class ArticleTextOutput
             //Getting the Article
             Element articleBodyWithTags = document.select("[itemprop=articleBody]").first();
 
-            //Removing all img tags in the article body
-            articleBodyWithTags.removeAttr("img");
-
             this.articleBody = filterText(articleBodyWithTags);
         }
 
@@ -111,12 +108,15 @@ public class ArticleTextOutput
         }
 
         private String filterText(Element articleBodyWithTags) {
+            //Removing all img tags in the article body
+            articleBodyWithTags.removeAttr("img");
+
             //Getting rid of HTML tags
             this.articleBody = articleBodyWithTags.getElementsByTag("p")
                     .toString()
                     .replaceAll("<[^>]*>", "");
 
-            //Getting rid of &nbsp; and &gt;
+                //Getting rid of &nbsp; and &gt;
             this.articleBody = this.articleBody.replace("&nbsp;", "");
             this.articleBody = this.articleBody.replace("&gt;", "");
             return this.articleBody;

@@ -43,6 +43,17 @@ public class NewsCrawler
 
             write(washingtonPostLink, washingtonPostDocument);
         }
+        else if(inputURL.contains("latimes"))
+        {
+            //This object is used to find the headline article from the given URL
+            NewsCrawlerLATimes newsCrawlerLATimes = new NewsCrawlerLATimes();
+
+            //Find LATimes headline article
+            String LATimesLink = newsCrawlerLATimes.findArticle(document);
+            Document LATimesDocument = getDocumentFromURL(LATimesLink);
+
+            write(LATimesLink, LATimesDocument);
+        }
         else
         {
             //This object is used to find the headline article from the given URL
